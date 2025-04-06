@@ -7,9 +7,16 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
-const db_url = "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/";
+const db_url =
+  "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/todoDB?retryWrites=true&w=majority";
 
 mongoose.connect(db_url);
 
@@ -38,21 +45,16 @@ app.post("/add", (req, res) => {
 
 app.put("/update/:id", (req, res) => {
   const id = req.params.id;
-  const { task, completed } = req.body; 
+  const { task, completed } = req.body;
 
   todosModel
-    .findByIdAndUpdate(
-      id,
-      { task, completed }, 
-      { new: true }
-    )
+    .findByIdAndUpdate(id, { task, completed }, { new: true })
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });
 
 app.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
-
   todosModel
     .findByIdAndDelete(id)
     .then((result) => res.json({ message: "Deleted successfully", result }))
