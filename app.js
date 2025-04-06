@@ -38,12 +38,12 @@ app.post("/add", (req, res) => {
 
 app.put("/update/:id", (req, res) => {
   const id = req.params.id;
-  const { task, completed } = req.body; // Now handling both task and completed
+  const { task, completed } = req.body; 
 
   todosModel
     .findByIdAndUpdate(
       id,
-      { task, completed }, // Update both task and completed status
+      { task, completed }, 
       { new: true }
     )
     .then((result) => res.json(result))
