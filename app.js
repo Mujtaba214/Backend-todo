@@ -28,14 +28,14 @@ mongoose.connection.on("error", (err) => {
   console.log(err);
 });
 
-app.get("/data", (req, res) => {
+app.get("/api/data", (req, res) => {
   todosModel
     .find()
     .then((result) => res.json(result))
     .catch((err) => res.json(err));
 });
 
-app.post("/add", (req, res) => {
+app.post("/api/add", (req, res) => {
   const task = req.body.task;
   todosModel
     .create({ task })
@@ -43,7 +43,7 @@ app.post("/add", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-app.put("/update/:id", (req, res) => {
+app.put("/api/update/:id", (req, res) => {
   const id = req.params.id;
   const { task, completed } = req.body;
 
@@ -53,7 +53,7 @@ app.put("/update/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-app.delete("/delete/:id", (req, res) => {
+app.delete("/api/delete/:id", (req, res) => {
   const id = req.params.id;
   todosModel
     .findByIdAndDelete(id)
