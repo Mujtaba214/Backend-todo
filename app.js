@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173/" }));
+app.use(cors({ origin: "http://localhost:5173" }));
 
 const db_url = "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/";
 
