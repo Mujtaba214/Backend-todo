@@ -7,16 +7,9 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+app.use(cors({ origin: "http://localhost:5173/" }));
 
-const db_url =
-  "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/todoDB?retryWrites=true&w=majority";
+const db_url = "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/";
 
 mongoose.connect(db_url);
 
