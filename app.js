@@ -6,15 +6,31 @@ import todosModel from "./models/todoModel.js";
 const app = express();
 const port = 3000;
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://todo-mern-ecru.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
+
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173" }));
 
 const db_url = "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/";
 
 mongoose.connect(db_url);
 
 mongoose.connection.on("connected", () => {
-  console.log("database connected");
+  console.log("Database connected");
 });
 
 mongoose.connection.on("error", (err) => {
@@ -55,5 +71,5 @@ app.delete("/api/delete/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on ${port}`);
+  console.log(`Server running on port ${port}`);
 });
