@@ -6,23 +6,7 @@ import todosModel from "./models/todoModel.js";
 const app = express();
 const port = 3000;
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://todo-mern-ecru.vercel.app",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
-
+app.use(cors({ origin: true }));
 app.use(express.json());
 
 const db_url = "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/";
