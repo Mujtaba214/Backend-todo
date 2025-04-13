@@ -6,16 +6,7 @@ import todosModel from "./models/todoModel.js";
 const app = express();
 const port = 3000;
 
-const options = [
-  cors({
-    origin: "*",
-    methods: "*",
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  }),
-];
-
-app.use(options);
+app.use(cors({ origin: true }));
 app.use(express.json());
 
 const db_url = "mongodb+srv://mujtaba21:mujtaba123@cluster0.tcsgq.mongodb.net/";
